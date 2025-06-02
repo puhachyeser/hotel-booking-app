@@ -1,14 +1,10 @@
-import React, {useEffect} from 'react'
+//import React, {useEffect} from 'react'
+import HotelPreviewList from './components/HotelPreviewList';
 
 function App() {
-  useEffect(() => {
-  fetch('http://localhost:5000/api/hello')
-    .then(res => res.json())
-    .then(data => console.log(data));
-  }, []);
-
   return (
     <>
+      <HotelPreviewList/>
     </>
   );
 }
