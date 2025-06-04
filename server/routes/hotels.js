@@ -4,10 +4,12 @@ const router = express.Router()
 
 const {
   createHotel,
-  getAllHotels
+  getAllHotels,
+  getHotel
 } = require('../controllers/hotels')
 
 router.route('/').post(createHotel).get(getAllHotels)
+router.route('/:id').get(getHotel)
 
 //router.route('/:id').get().delete().patch()
 

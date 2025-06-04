@@ -20,6 +20,10 @@ const HotelSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please provide bottom price'],
     },
+    description: {
+      type: String,
+      required: [true, 'Please provide description'],
+    },
     /*
     createdBy: {
       type: mongoose.Types.ObjectId,
