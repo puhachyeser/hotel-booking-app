@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
-const HotelSchema = new mongoose.Schema(
+const BookingSchema = new mongoose.Schema(
   {
+    /*
     name: {
       type: String,
       required: [true, 'Please provide hotel name'],
@@ -29,8 +30,9 @@ const HotelSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Please provide user'],
     },
+    */
   },
   { timestamps: true }
 )
 
-module.exports = mongoose.model('Hotel', HotelSchema)
+module.exports = mongoose.model('Booking', BookingSchema)

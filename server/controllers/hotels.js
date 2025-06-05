@@ -18,6 +18,7 @@ const getHotel = async (req, res) => {
 }
 
 const createHotel = async (req, res) => {
+    req.body.createdBy = req.user.userId
     const hotel = await Hotel.create(req.body)
     res.status(StatusCodes.CREATED).json({ hotel })
 }

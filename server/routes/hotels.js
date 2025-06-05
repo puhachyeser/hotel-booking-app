@@ -1,4 +1,5 @@
 const express = require('express')
+const authenticateUser = require('../middleware/authentication')
 
 const router = express.Router()
 
@@ -8,8 +9,10 @@ const {
   getHotel
 } = require('../controllers/hotels')
 
-router.route('/').post(createHotel).get(getAllHotels)
+router.route('/').get(getAllHotels)
 router.route('/:id').get(getHotel)
+
+router.route('/').post(authenticateUser, createHotel)
 
 //router.route('/:id').get().delete().patch()
 
