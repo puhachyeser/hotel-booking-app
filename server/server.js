@@ -6,13 +6,22 @@ const app = express()
 const cors = require('cors')
 
 const connectDB = require('./db/connect')
+const authenticateUser = require('./middleware/authentication')
 
+const authRouter = require('./routes/auth')
 const hotelsRouter = require('./routes/hotels')
+
+const notFoundMiddleware = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
 app.use(express.json());
 app.use(cors())
 
-app.use('/hotels-api/hotels', hotelsRouter)
+app.use('/hotels-api/auth', authRouter)
+app.use('/hotels-api/hotels', authenticateUser, hotelsRouter)
+
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
 app.get('/', (req, res) => {
     res.send(`
