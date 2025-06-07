@@ -6,7 +6,9 @@ const router = express.Router()
 const {
   createHotel,
   getAllHotels,
-  getHotel
+  getHotel,
+  updateHotel,
+  deleteHotel
 } = require('../controllers/hotels')
 
 router.route('/').get(getAllHotels)
@@ -14,6 +16,7 @@ router.route('/:id').get(getHotel)
 
 router.route('/').post(authenticateUser, createHotel)
 
-//router.route('/:id').get().delete().patch()
+router.route('/:id').patch(authenticateUser, updateHotel)
+router.route('/:id').delete(authenticateUser, deleteHotel)
 
 module.exports = router

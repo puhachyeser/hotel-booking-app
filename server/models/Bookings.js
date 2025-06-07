@@ -2,35 +2,28 @@ const mongoose = require('mongoose')
 
 const BookingSchema = new mongoose.Schema(
   {
-    /*
-    name: {
+    hotel: {
       type: String,
       required: [true, 'Please provide hotel name'],
       maxlength: 50,
     },
-    location: {
-      type: String,
-      required: [true, 'Please provide hotel location'],
-      maxlength: 100,
-    },
-    rating: {
+    room: {
       type: Number,
-      required: [true, 'Please provide rating'],
+      required: [true, 'Please provide room number'],
     },
-    bottomPrice: {
-      type: Number,
-      required: [true, 'Please provide bottom price'],
+    checkInDate: {
+      type: Date,
+      required: [true, 'Please provide check-in date'],
     },
-    description: {
-      type: String,
-      required: [true, 'Please provide description'],
+    checkOutDate: {
+      type: Date,
+      required: [true, 'Please provide check-out date'],
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
       required: [true, 'Please provide user'],
     },
-    */
   },
   { timestamps: true }
 )
