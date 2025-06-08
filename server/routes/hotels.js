@@ -16,6 +16,7 @@ router.route('/:id').get(getHotel)
 
 router.route('/').post(authenticateUser, createHotel)
 
+// add admin or user(owner) auth
 router.route('/:id').patch(authenticateUser, updateHotel)
 router.route('/:id').delete(authenticateUser, deleteHotel)
 
