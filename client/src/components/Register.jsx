@@ -33,7 +33,7 @@ export default function Register() {
                 password: formData.password,
             })
 
-            setMessage('Registration successful. Check your email to verify your account.')
+            setMessage('Verify your email to complete registration.')
             setFormData({ name: '', email: '', password: '', confirmPassword: '' })
         } catch (err) {
             console.error(err)
