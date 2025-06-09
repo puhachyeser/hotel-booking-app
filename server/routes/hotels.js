@@ -8,15 +8,19 @@ const {
   getAllHotels,
   getHotel,
   updateHotel,
-  deleteHotel
+  deleteHotel,
+  bookHotel,
+  unbookHotel
 } = require('../controllers/hotels')
 
 router.route('/').get(getAllHotels)
 router.route('/:id').get(getHotel)
 
-router.route('/').post(authenticateUser, createHotel)
+router.route('/book/:id').post(authenticateUser, bookHotel)
+router.route('/book/:id').delete(authenticateUser, unbookHotel)
 
 // add admin or user(owner) auth
+router.route('/').post(authenticateUser, createHotel)
 router.route('/:id').patch(authenticateUser, updateHotel)
 router.route('/:id').delete(authenticateUser, deleteHotel)
 

@@ -1,6 +1,7 @@
 const Hotel = require('../models/Hotel')
 const { StatusCodes } = require('http-status-codes')
 const { NotFoundError } = require('../errors')
+const Booking = require('../models/Booking')
 
 const getAllHotels = async (req, res) => {
     const hotels = await Hotel.find()
@@ -52,10 +53,33 @@ const deleteHotel = async (req, res) => {
     res.status(StatusCodes.OK).send()
 }
 
+const bookHotel = async (req, res) => {
+    req.body.createdBy = req.user.userId
+    req.body.hotelId = req.params.id
+    const booking = await Booking.create(req.body)
+    res.status(StatusCodes.CREATED).json({ booking })
+}
+
+const unbookHotel = async (req, res) => {
+    const {
+        user: { userId },
+        params: { id: hotelId },
+    } = req
+
+    const booking = await Booking.findOneAndDelete({createdBy: userId, hotelId: hotelId})
+    if (!booking) {
+        res.status(StatusCodes.NOT_FOUND).json("Not found error")
+        throw new NotFoundError(`No bookings at hotel with id ${hotelId}`)
+    }
+    res.status(StatusCodes.OK).send()
+}
+
 module.exports = {
     createHotel,
     getAllHotels,
     getHotel,
     updateHotel,
-    deleteHotel
+    deleteHotel,
+    bookHotel,
+    unbookHotel
 }

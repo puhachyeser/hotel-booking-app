@@ -2,10 +2,9 @@ const mongoose = require('mongoose')
 
 const BookingSchema = new mongoose.Schema(
   {
-    hotel: {
+    hotelId: {
       type: String,
-      required: [true, 'Please provide hotel name'],
-      maxlength: 50,
+      required: [true, 'Please provide hotel id'],
     },
     room: {
       type: Number,
