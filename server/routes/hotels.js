@@ -19,8 +19,9 @@ router.route('/:id').get(getHotel)
 router.route('/book/:id').post(authenticateUser, bookHotel)
 router.route('/book/:id').delete(authenticateUser, unbookHotel)
 
-// add admin or user(owner) auth
+// any user can create but admin approval is needed , admin can create unconditionally
 router.route('/').post(authenticateUser, createHotel)
+
 router.route('/:id').patch(authenticateUser, updateHotel)
 router.route('/:id').delete(authenticateUser, deleteHotel)
 

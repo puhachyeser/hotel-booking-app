@@ -1,7 +1,9 @@
 const Hotel = require('../models/Hotel')
+const Booking = require('../models/Booking')
+const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { NotFoundError } = require('../errors')
-const Booking = require('../models/Booking')
+const checkHotelAccess = require('../utils/checkPermissions')
 
 const getAllHotels = async (req, res) => {
     const hotels = await Hotel.find()
@@ -13,7 +15,6 @@ const getHotel = async (req, res) => {
 
     const hotel = await Hotel.findOne({_id: hotelId})
     if (!hotel) {
-        res.status(StatusCodes.NOT_FOUND).json("Not found error")
         throw new NotFoundError(`No hotel with id ${hotelId}`)
     }
     res.status(StatusCodes.OK).json({ hotel })
@@ -31,12 +32,16 @@ const updateHotel = async (req, res) => {
         params: { id: hotelId },
     } = req
 
-    const hotel = await Hotel.findOneAndUpdate({_id: hotelId, createdBy: userId}, req.body, { new: true, runValidators: true })
+    const hotel = await Hotel.findOne({_id: hotelId })
     if (!hotel) {
-        res.status(StatusCodes.NOT_FOUND).json("Not found error")
         throw new NotFoundError(`No hotel with id ${hotelId}`)
     }
-    res.status(StatusCodes.OK).json({ hotel })
+
+    const user = await User.findOne({_id: userId})
+    checkHotelAccess(user, hotel)
+
+    const updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId, createdBy: userId}, req.body, { new: true, runValidators: true })
+    res.status(StatusCodes.OK).json({ updatedHotel })
 }
 
 const deleteHotel = async (req, res) => {
@@ -45,11 +50,15 @@ const deleteHotel = async (req, res) => {
         params: { id: hotelId },
     } = req
 
-    const hotel = await Hotel.findOneAndDelete({createdBy: userId, _id: hotelId})
+    const hotel = await Hotel.findOne({_id: hotelId })
     if (!hotel) {
-        res.status(StatusCodes.NOT_FOUND).json("Not found error")
         throw new NotFoundError(`No hotel with id ${hotelId}`)
     }
+
+    const user = await User.findOne({_id: userId})
+    checkHotelAccess(user, hotel)
+
+    const updatedHotel = await Hotel.findOneAndDelete({_id: hotelId, createdBy: userId}, req.body, { new: true, runValidators: true })
     res.status(StatusCodes.OK).send()
 }
 
@@ -68,7 +77,6 @@ const unbookHotel = async (req, res) => {
 
     const booking = await Booking.findOneAndDelete({createdBy: userId, hotelId: hotelId})
     if (!booking) {
-        res.status(StatusCodes.NOT_FOUND).json("Not found error")
         throw new NotFoundError(`No bookings at hotel with id ${hotelId}`)
     }
     res.status(StatusCodes.OK).send()
