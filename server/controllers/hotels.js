@@ -2,18 +2,18 @@ const Hotel = require('../models/Hotel')
 const Booking = require('../models/Booking')
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const { NotFoundError } = require('../errors')
+const { NotFoundError, UnauthorizedError } = require('../errors')
 const checkHotelAccess = require('../utils/checkPermissions')
 
 const getAllHotels = async (req, res) => {
-    const hotels = await Hotel.find()
+    const hotels = await Hotel.find({approved: true})
     res.status(StatusCodes.OK).json({ hotels, count: hotels.length })
 }
 
 const getHotel = async (req, res) => {
     const hotelId = req.params.id;
 
-    const hotel = await Hotel.findOne({_id: hotelId})
+    const hotel = await Hotel.findOne({_id: hotelId, approved: true})
     if (!hotel) {
         throw new NotFoundError(`No hotel with id ${hotelId}`)
     }
@@ -40,7 +40,11 @@ const updateHotel = async (req, res) => {
     const user = await User.findOne({_id: userId})
     checkHotelAccess(user, hotel)
 
-    const updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId, createdBy: userId}, req.body, { new: true, runValidators: true })
+    if (!user.isAdmin && req.body.approved !== undefined) {
+        throw new UnauthorizedError('Only admins can approve hotels')
+    }
+
+    const updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, req.body, { new: true, runValidators: true })
     res.status(StatusCodes.OK).json({ updatedHotel })
 }
 

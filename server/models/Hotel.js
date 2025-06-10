@@ -29,6 +29,10 @@ const HotelSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Please provide user'],
     },
+    approved: {
+      type: Boolean,
+      default: false
+    },
   },
   { timestamps: true }
 )
