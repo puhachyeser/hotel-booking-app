@@ -2,7 +2,7 @@ const Hotel = require('../models/Hotel')
 const Booking = require('../models/Booking')
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const { NotFoundError, UnauthorizedError } = require('../errors')
+const { NotFoundError, UnauthorizedError, BadRequestError } = require('../errors')
 const checkHotelAccess = require('../utils/checkPermissions')
 
 const getAllHotels = async (req, res) => {
@@ -21,6 +21,13 @@ const getHotel = async (req, res) => {
 }
 
 const createHotel = async (req, res) => {
+    /*
+    For admin created hotels to be aprroved on creation
+
+    const user = await User.findOne({_id: req.user.userId})
+    if (user.isAdmin) req.body.approved = true;
+    */
+
     req.body.createdBy = req.user.userId
     const hotel = await Hotel.create(req.body)
     res.status(StatusCodes.CREATED).json({ hotel })
@@ -67,8 +74,33 @@ const deleteHotel = async (req, res) => {
 }
 
 const bookHotel = async (req, res) => {
+    const {
+        body: { checkInDate, checkOutDate, roomId },
+        params: { id: hotelId },
+    } = req
+
+    const hotel = await Hotel.findOne({_id: hotelId})
+    if (!hotel || !hotel.approved) {
+        throw new NotFoundError(`No approved hotel with id ${hotelId}`)
+    }
+
+    const room = hotel.rooms.find((r) => r._id.toString() === roomId.toString())
+    if (!room) {
+        throw new NotFoundError(`No room with id ${roomId} in this hotel`)
+    }
+
+    const overlapping = await Booking.findOne({
+        hotelId, roomId,
+        checkInDate: { $lt: new Date(checkOutDate) },
+        checkOutDate: { $gt: new Date(checkInDate) }
+    })
+
+    if (overlapping) {
+        throw new BadRequestError('This room is already booked for the selected dates')
+    }
+
     req.body.createdBy = req.user.userId
-    req.body.hotelId = req.params.id
+    req.body.hotelId = hotelId
     const booking = await Booking.create(req.body)
     res.status(StatusCodes.CREATED).json({ booking })
 }
@@ -79,9 +111,9 @@ const unbookHotel = async (req, res) => {
         params: { id: hotelId },
     } = req
 
-    const booking = await Booking.findOneAndDelete({createdBy: userId, hotelId: hotelId})
+    const booking = await Booking.findOneAndDelete({createdBy: userId, hotelId})
     if (!booking) {
-        throw new NotFoundError(`No bookings at hotel with id ${hotelId}`)
+        throw new NotFoundError(`No bookings from this user at this hotel`)
     }
     res.status(StatusCodes.OK).send()
 }
