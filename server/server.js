@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./services/cron')
 
 const express = require('express')
 const app = express()
