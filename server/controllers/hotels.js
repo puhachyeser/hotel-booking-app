@@ -118,6 +118,27 @@ const unbookHotel = async (req, res) => {
     res.status(StatusCodes.OK).send()
 }
 
+const confirmBooking = async (req, res) => {
+    const {
+        user: { userId },
+        params: { id: hotelId },
+    } = req
+    const booking = await Booking.findOne({createdBy: userId, hotelId})
+
+    if (!booking) {
+        throw new NotFoundError(`No bookings from this user at this hotel`)
+    }
+
+    if (booking.status !== 'pending') {
+        throw new BadRequestError('Booking already confirmed')
+    }
+
+    booking.status = 'confirmed'
+    await booking.save()
+
+    res.status(StatusCodes.OK).json({ booking })
+}
+
 module.exports = {
     createHotel,
     getAllHotels,
@@ -125,5 +146,6 @@ module.exports = {
     updateHotel,
     deleteHotel,
     bookHotel,
-    unbookHotel
+    unbookHotel,
+    confirmBooking
 }
