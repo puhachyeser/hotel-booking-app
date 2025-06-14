@@ -11,13 +11,23 @@ const getAllHotels = async (req, res) => {
 }
 
 const getHotel = async (req, res) => {
-    const hotelId = req.params.id;
+    const hotelId = req.params.id
 
-    const hotel = await Hotel.findOne({_id: hotelId, approved: true})
+    const hotel = await Hotel.findOne({approved: true, _id: hotelId})
     if (!hotel) {
-        throw new NotFoundError(`No hotel with id ${hotelId}`)
+        throw new NotFoundError(`No approved hotel with id ${hotelId}`)
     }
     res.status(StatusCodes.OK).json({ hotel })
+}
+
+const getAllRooms = async (req, res) => {
+    const hotelId = req.params.id
+    const hotel = await Hotel.findOne({approved: true, _id: hotelId})
+    if (!hotel) {
+        throw new NotFoundError(`No approved hotel with id ${hotelId}`)
+    }
+
+    res.status(StatusCodes.OK).json({ rooms: hotel.rooms })
 }
 
 const createHotel = async (req, res) => {
@@ -39,9 +49,9 @@ const updateHotel = async (req, res) => {
         params: { id: hotelId },
     } = req
 
-    const hotel = await Hotel.findOne({_id: hotelId })
+    const hotel = await Hotel.findOne({approved: true, _id: hotelId})
     if (!hotel) {
-        throw new NotFoundError(`No hotel with id ${hotelId}`)
+        throw new NotFoundError(`No approved hotel with id ${hotelId}`)
     }
 
     const user = await User.findOne({_id: userId})
@@ -61,9 +71,9 @@ const deleteHotel = async (req, res) => {
         params: { id: hotelId },
     } = req
 
-    const hotel = await Hotel.findOne({_id: hotelId })
+    const hotel = await Hotel.findOne({approved: true, _id: hotelId})
     if (!hotel) {
-        throw new NotFoundError(`No hotel with id ${hotelId}`)
+        throw new NotFoundError(`No approved hotel with id ${hotelId}`)
     }
 
     const user = await User.findOne({_id: userId})
@@ -79,8 +89,8 @@ const bookHotel = async (req, res) => {
         params: { id: hotelId },
     } = req
 
-    const hotel = await Hotel.findOne({_id: hotelId})
-    if (!hotel || !hotel.approved) {
+    const hotel = await Hotel.findOne({approved: true, _id: hotelId})
+    if (!hotel) {
         throw new NotFoundError(`No approved hotel with id ${hotelId}`)
     }
 
@@ -143,6 +153,7 @@ module.exports = {
     createHotel,
     getAllHotels,
     getHotel,
+    getAllRooms,
     updateHotel,
     deleteHotel,
     bookHotel,

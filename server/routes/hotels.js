@@ -7,6 +7,7 @@ const {
   createHotel,
   getAllHotels,
   getHotel,
+  getAllRooms,
   updateHotel,
   deleteHotel,
   bookHotel,
@@ -16,6 +17,7 @@ const {
 
 router.route('/').get(getAllHotels)
 router.route('/:id').get(getHotel)
+router.route('/:id/rooms').get(getAllRooms)
 
 router.route('/book/:id').post(authenticateUser, bookHotel)
 router.route('/book/:id').delete(authenticateUser, unbookHotel)
