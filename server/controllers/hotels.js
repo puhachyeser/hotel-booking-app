@@ -6,8 +6,17 @@ const { NotFoundError, UnauthorizedError, BadRequestError } = require('../errors
 const checkHotelAccess = require('../utils/checkPermissions')
 
 const getAllHotels = async (req, res) => {
-    const hotels = await Hotel.find({approved: true})
-    res.status(StatusCodes.OK).json({ hotels, count: hotels.length })
+    const limit = 5
+    const page = parseInt(req.query.page)
+
+    const hotels = await Hotel.find({ approved: true })
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+    const total = await Hotel.countDocuments({ approved: true })
+    const totalPages = Math.ceil(total / limit)
+
+    res.status(StatusCodes.OK).json({ hotels, totalPages, currentPage: page })
 }
 
 const getHotel = async (req, res) => {
