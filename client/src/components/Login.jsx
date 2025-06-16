@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-export default function Register() {
+export default function Login() {
     const [formData, setFormData] = useState({
-        name: '',
         email: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
     })
 
     const [message, setMessage] = useState('')
@@ -21,39 +19,24 @@ export default function Register() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        if (formData.password !== formData.confirmPassword) {
-            setMessage('Passwords do not match');
-            return;
-        }
-
         try {
-            await axios.post('http://localhost:5000/hotels-api/auth/register', {
-                name: formData.name,
+            await axios.post('http://localhost:5000/hotels-api/auth/login', {
                 email: formData.email,
                 password: formData.password,
             })
 
-            setMessage('Verify your email to complete registration.')
-            setFormData({ name: '', email: '', password: '', confirmPassword: '' })
+            setMessage('Login is successful')
+            setFormData({ email: '', password: '' })
         } catch (err) {
             console.error(err)
-            setMessage(err.response?.data?.msg || 'Registration failed')
+            setMessage(err.response?.data?.msg || 'Login failed')
         }
     }
 
     return(
         <div className="register-form-container">
-            <h2>Register</h2>
+            <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <p>Name</p>
-                <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
-
                 <p>Email</p>
                 <input
                     type="email"
@@ -62,7 +45,6 @@ export default function Register() {
                     onChange={handleChange}
                     required
                 />
-
                 <p>Password</p>
                 <input
                     type="password"
@@ -71,17 +53,7 @@ export default function Register() {
                     onChange={handleChange}
                     required
                 />
-
-                <p>Confirm Password</p>
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                />
-
-                <button type="submit">Register</button>
+                <button type="submit">Login</button>
                 {message && <p>{message}</p>}
             </form>
         </div>

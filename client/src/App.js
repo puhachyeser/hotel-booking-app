@@ -3,6 +3,7 @@ import Layout from './components/MainLayout'
 import HotelPreviewList from './components/HotelPreviewList'
 import HotelPage from './components/HotelPage'
 import Register from './components/Register'
+import Login from './components/Login'
 import EmailVerificationPage from './components/EmailVerificationPage'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<HotelPreviewList />} />
           <Route path="hotels/:id" element={<HotelPage />} />
           <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
           <Route path="register/verify-email/:token" element={<EmailVerificationPage />} />
         </Route>
       </Routes>
