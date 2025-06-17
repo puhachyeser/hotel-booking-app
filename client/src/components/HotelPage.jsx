@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import RoomPreview from './RoomPreview'
 import axios from 'axios'
 
 export default function HotelPage() {
     const { id } = useParams()
+    const [rooms, setRooms] = useState([])
     const [hotel, setHotel] = useState(null)
 
     useEffect(() => {
@@ -11,15 +13,16 @@ export default function HotelPage() {
             try {
                 const res = await axios.get(`http://localhost:5000/hotels-api/hotels/${id}`)
                 setHotel(res.data.hotel)
-            } catch (error) {
-                console.error('Error loading hotel:', error)
+                setRooms(res.data.hotel.rooms)
+            } catch (err) {
+                console.error('Error loading hotel:', err)
             }
         }
 
         fetchHotel()
     }, [id])
 
-    if (!hotel) return <p>Loading...</p>;
+    if (!hotel) return <p>Loading...</p>
 
     return (
     <div>
@@ -27,7 +30,13 @@ export default function HotelPage() {
         <p>Location: {hotel.location}</p>
         <p>Rating: {hotel.rating}</p>
         <p>Price from: {hotel.bottomPrice}</p>
-        <p>Description: {hotel.description}</p>
+        <p style={{ whiteSpace: 'pre-line' }}>{hotel.description}</p>
+        <h3>Rooms</h3>
+        <ul>
+            {rooms.map(room => (
+                <RoomPreview key={room._id} hotelId={hotel._id} room={room} />
+            ))}
+        </ul>
     </div>
     );
 }

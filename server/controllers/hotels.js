@@ -39,6 +39,21 @@ const getAllRooms = async (req, res) => {
     res.status(StatusCodes.OK).json({ rooms: hotel.rooms })
 }
 
+const getRoom = async (req, res) => {
+    const {
+        hotelId,
+        roomId
+    } = req.params
+
+    const hotel = await Hotel.findOne({approved: true, _id: hotelId})
+    if (!hotel) {
+        throw new NotFoundError(`No approved hotel with id ${hotelId}`)
+    }
+
+    const room = hotel.rooms.find((room) => room._id == roomId)
+    res.status(StatusCodes.OK).json({ room })
+}
+
 const createHotel = async (req, res) => {
     /*
     For admin created hotels to be aprroved on creation
@@ -163,6 +178,7 @@ module.exports = {
     getAllHotels,
     getHotel,
     getAllRooms,
+    getRoom,
     updateHotel,
     deleteHotel,
     bookHotel,
