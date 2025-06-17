@@ -6,6 +6,9 @@ export default function RoomPreview ({ hotelId, room }) {
             <Link to={`/hotels/${hotelId}/room/${room._id}`}>
                 <strong>{room.number}</strong> ~ {room.type} ~ Price: {room.price}
             </Link>
+            <Link to={`/hotels/${hotelId}/room/${room._id}/book`}>
+                <button>Book</button>        
+            </Link>
         </li>
     );
 }

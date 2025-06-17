@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default function RoomPage() {
@@ -27,6 +27,9 @@ export default function RoomPage() {
         <p>{room.type}</p>
         <p>{room.price}</p>
         <p style={{ whiteSpace: 'pre-line' }}>{room.description}</p>
+        <Link to={`/hotels/${hotelId}/room/${room._id}/book`}>
+            <button>Book</button>        
+        </Link>
     </div>
     );
 }

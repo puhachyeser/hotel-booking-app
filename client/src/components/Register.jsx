@@ -19,7 +19,7 @@ export default function Register() {
     }
 
     const handleSubmit = async e => {
-        e.preventDefault();
+        e.preventDefault()
 
         if (formData.password !== formData.confirmPassword) {
             setMessage('Passwords do not match');
@@ -37,7 +37,7 @@ export default function Register() {
             setFormData({ name: '', email: '', password: '', confirmPassword: '' })
         } catch (err) {
             console.error(err)
-            setMessage(err.response?.data?.msg || 'Registration failed')
+            setMessage('Registration failed')
         }
     }
 
