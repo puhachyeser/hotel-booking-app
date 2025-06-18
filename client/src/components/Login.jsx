@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -20,16 +20,18 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            await axios.post('http://localhost:5000/hotels-api/auth/login', {
+            const res = await axiosInstance.post('/auth/login', {
                 email: formData.email,
                 password: formData.password,
             })
+
+            localStorage.setItem('token', res.data.token)
 
             setMessage('Login is successful')
             setFormData({ email: '', password: '' })
         } catch (err) {
             console.error(err)
-            setMessage(err.response?.data?.msg || 'Login failed')
+            setMessage('Login failed')
         }
     }
 

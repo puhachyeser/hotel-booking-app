@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ export default function Register() {
         }
 
         try {
-            await axios.post('http://localhost:5000/hotels-api/auth/register', {
+            await axiosInstance.post('/auth/register', {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password,
@@ -53,7 +53,6 @@ export default function Register() {
                     onChange={handleChange}
                     required
                 />
-
                 <p>Email</p>
                 <input
                     type="email"
@@ -62,7 +61,6 @@ export default function Register() {
                     onChange={handleChange}
                     required
                 />
-
                 <p>Password</p>
                 <input
                     type="password"
@@ -71,7 +69,6 @@ export default function Register() {
                     onChange={handleChange}
                     required
                 />
-
                 <p>Confirm Password</p>
                 <input
                     type="password"
@@ -80,7 +77,6 @@ export default function Register() {
                     onChange={handleChange}
                     required
                 />
-
                 <button type="submit">Register</button>
                 {message && <p>{message}</p>}
             </form>

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 export default function EmailVerificationPage() {
   const { token } = useParams()
@@ -9,7 +9,7 @@ export default function EmailVerificationPage() {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        await axios.patch(`http://localhost:5000/hotels-api/auth/verify-email/${token}`)
+        await axiosInstance.patch(`/auth/verify-email/${token}`)
         setMessage('Registration has been successfully completed.')
       } catch (err) {
         console.error(err)

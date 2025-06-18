@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import HotelPreview from './HotelPreview'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 export default function HotelPreviewList() {
   const [hotels, setHotels] = useState([])
@@ -10,7 +10,7 @@ export default function HotelPreviewList() {
   useEffect(() => {
     const fetchHotels = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/hotels-api/hotels?page=${page}`)
+      const res = await axiosInstance.get(`/hotels?page=${page}`)
       setHotels(res.data.hotels)
       setTotalPages(res.data.totalPages)
     } catch (error) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 export default function RoomPage() {
     const { hotelId, roomId } = useParams()
@@ -9,7 +9,7 @@ export default function RoomPage() {
     useEffect(() => {
         const fetchRoom = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/hotels-api/hotels/${hotelId}/rooms/${roomId}`)
+                const res = await axiosInstance.get(`/hotels/${hotelId}/rooms/${roomId}`)
                 setRoom(res.data.room)
             } catch (err) {
                 console.error('Error loading room:', err)
