@@ -38,28 +38,28 @@ export default function Login() {
     }
 
     return(
-        <div className="register-form-container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <p>Email</p>
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Password</p>
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit">Login</button>
-                {message && <p>{message}</p>}
-            </form>
-        </div>
+    <div className="register-form-container">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+            <p>Email</p>
+            <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+            />
+            <p>Password</p>
+            <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+            />
+            <button type="submit">Login</button>
+            {message && <p>{message}</p>}
+        </form>
+    </div>
     );
 }

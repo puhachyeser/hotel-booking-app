@@ -21,8 +21,8 @@ export default function EmailVerificationPage() {
   }, [token]);
 
   return (
-    <div className="email-verification-container">
-      <h1>{message}</h1>
-    </div>
+  <div className="email-verification-container">
+    <h1>{message}</h1>
+  </div>
   );
 }

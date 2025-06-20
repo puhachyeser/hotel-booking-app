@@ -42,44 +42,44 @@ export default function Register() {
     }
 
     return(
-        <div className="register-form-container">
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <p>Name</p>
-                <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Email</p>
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Password</p>
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Confirm Password</p>
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit">Register</button>
-                {message && <p>{message}</p>}
-            </form>
-        </div>
+    <div className="register-form-container">
+        <h2>Register</h2>
+        <form onSubmit={handleSubmit}>
+            <p>Name</p>
+            <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+            />
+            <p>Email</p>
+            <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+            />
+            <p>Password</p>
+            <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+            />
+            <p>Confirm Password</p>
+            <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+            />
+            <button type="submit">Register</button>
+            {message && <p>{message}</p>}
+        </form>
+    </div>
     );
 }

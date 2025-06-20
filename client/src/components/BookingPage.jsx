@@ -58,28 +58,28 @@ export default function BookingPage() {
     }
 
     return(
-        <div>
-            <h2>Booking</h2>
-            <form onSubmit={handleSubmit}>
-                <p>Check In</p>
-                <input
-                    type="date"
-                    name="checkInDate"
-                    value={formData.checkInDate}
-                    onChange={handleChange}
-                    required
-                />
-                <p>Check Out</p>
-                <input
-                    type="date"
-                    name="checkOutDate"
-                    value={formData.checkOutDate}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit">Book</button>
-                {message && <p>{message}</p>}
-            </form>
-        </div>
+    <div>
+        <h2>Booking</h2>
+        <form onSubmit={handleSubmit}>
+            <p>Check In</p>
+            <input
+                type="date"
+                name="checkInDate"
+                value={formData.checkInDate}
+                onChange={handleChange}
+                required
+            />
+            <p>Check Out</p>
+            <input
+                type="date"
+                name="checkOutDate"
+                value={formData.checkOutDate}
+                onChange={handleChange}
+                required
+            />
+            <button type="submit">Book</button>
+            {message && <p>{message}</p>}
+        </form>
+    </div>
     );
 }

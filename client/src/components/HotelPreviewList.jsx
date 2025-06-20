@@ -30,22 +30,22 @@ export default function HotelPreviewList() {
   }
 
   return (
+  <div>
+    <h2>Hotel List</h2>
+    <ul>
+      {hotels.map(hotel => (
+        <HotelPreview key={hotel._id} hotel={hotel} />
+      ))}
+    </ul>
     <div>
-      <h2>Hotel List</h2>
-      <ul>
-        {hotels.map(hotel => (
-          <HotelPreview key={hotel._id} hotel={hotel} />
-        ))}
-      </ul>
-      <div>
-        <button onClick={handlePrevious} disabled={page === 1}>
-          ⬅️
-        </button>
-        <button onClick={handleNext} disabled={page === totalPages}>
-          ➡️
-        </button>
-        <p>Page {page} of {totalPages}</p>
-      </div>
+      <button onClick={handlePrevious} disabled={page === 1}>
+        ⬅️
+      </button>
+      <button onClick={handleNext} disabled={page === totalPages}>
+        ➡️
+      </button>
+      <p>Page {page} of {totalPages}</p>
     </div>
+  </div>
   );
 }
