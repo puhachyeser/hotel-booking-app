@@ -22,8 +22,8 @@ router.route('/:id/rooms').get(getAllRooms)
 router.route('/:hotelId/rooms/:roomId').get(getRoom)
 
 router.route('/book/:id').post(authenticateUser, bookHotel)
-router.route('/book/:id').delete(authenticateUser, unbookHotel)
-router.route('/book/:id').patch(authenticateUser, confirmBooking)
+router.route('/book/:bookingId').delete(authenticateUser, unbookHotel)
+router.route('/book/:bookingId').patch(authenticateUser, confirmBooking)
 
 router.route('/').post(authenticateUser, createHotel)
 router.route('/:id').patch(authenticateUser, updateHotel)

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axiosInstance from '../axiosInstance'
 import dayjs from 'dayjs'
 
 export default function BookingPage() {
+    const navigate = useNavigate()
     const { hotelId, roomId } = useParams()
     const [room, setRoom] = useState(null)
     const [formData, setFormData] = useState({
@@ -41,21 +42,21 @@ export default function BookingPage() {
         const checkOut = dayjs(formData.checkOutDate)
         const today = dayjs().startOf('day')
 
-        if (!checkIn.isValid() || !checkOut.isValid() || checkIn.isBefore(today) || !checkOut.isAfter(checkIn)) {
+        if (!checkIn.isValid() || !checkOut.isValid() || checkIn.isBefore(today) || !checkIn.isBefore(checkOut)) {
             setMessage('Invalid date')
             setFormData({ checkInDate: '', checkOutDate: '' })
             return
         }
 
         try {
-            await axiosInstance.post(`/hotels/book/${hotelId}`, {
+            const res = await axiosInstance.post(`/hotels/book/${hotelId}`, {
                 roomId,
                 checkInDate: formData.checkInDate,
                 checkOutDate: formData.checkOutDate
             })
 
-            setMessage('Pay for the booking to finish')
             setFormData({ checkInDate: '', checkOutDate: '' })
+            navigate(`${res.data.booking._id}/payment`)
         } catch (err) {
             console.error(err)
             setMessage('Booking failed')

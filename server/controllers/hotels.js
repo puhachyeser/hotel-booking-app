@@ -142,10 +142,10 @@ const bookHotel = async (req, res) => {
 const unbookHotel = async (req, res) => {
     const {
         user: { userId },
-        params: { id: hotelId },
+        params: { bookingId },
     } = req
 
-    const booking = await Booking.findOneAndDelete({createdBy: userId, hotelId})
+    const booking = await Booking.findOneAndDelete({createdBy: userId, _id: bookingId})
     if (!booking) {
         throw new NotFoundError(`No bookings from this user at this hotel`)
     }
@@ -155,9 +155,9 @@ const unbookHotel = async (req, res) => {
 const confirmBooking = async (req, res) => {
     const {
         user: { userId },
-        params: { id: hotelId },
+        params: { bookingId },
     } = req
-    const booking = await Booking.findOne({createdBy: userId, hotelId})
+    const booking = await Booking.findOne({createdBy: userId, _id: bookingId})
 
     if (!booking) {
         throw new NotFoundError(`No bookings from this user at this hotel`)
