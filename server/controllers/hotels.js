@@ -85,8 +85,16 @@ const updateHotel = async (req, res) => {
         throw new UnauthorizedError('Only admins can approve hotels')
     }
 
-    const updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, req.body, { new: true, runValidators: true })
-    res.status(StatusCodes.OK).json({ updatedHotel })
+    Object.assign(hotel, req.body)
+    if (req.body.rooms) {
+        hotel.markModified('rooms')
+    }
+    await hotel.save()
+
+    res.status(StatusCodes.OK).json({ updatedHotel: hotel })
+
+    //const updatedHotel = await Hotel.findOneAndUpdate({_id: hotelId}, req.body, { new: true, runValidators: true })
+    //res.status(StatusCodes.OK).json({ updatedHotel })
 }
 
 const deleteHotel = async (req, res) => {
@@ -103,7 +111,7 @@ const deleteHotel = async (req, res) => {
     const user = await User.findOne({_id: userId})
     checkHotelAccess(user, hotel)
 
-    const updatedHotel = await Hotel.findOneAndDelete({_id: hotelId, createdBy: userId}, req.body, { new: true, runValidators: true })
+    await Hotel.findOneAndDelete({_id: hotelId, createdBy: userId})
     res.status(StatusCodes.OK).send()
 }
 

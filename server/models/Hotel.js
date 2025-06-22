@@ -18,7 +18,7 @@ const HotelSchema = new mongoose.Schema(
     },
     bottomPrice: {
       type: Number,
-      required: [true, 'Please provide bottom price'],
+      default: 0
     },
     description: {
       type: String,
@@ -65,5 +65,13 @@ const HotelSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
+
+HotelSchema.pre('validate', function (next) {
+  if (this.rooms && this.rooms.length > 0) {
+    const prices = this.rooms.map(room => room.price)
+    this.bottomPrice = Math.min(...prices)
+  }
+  next()
+})
 
 module.exports = mongoose.model('Hotel', HotelSchema)
