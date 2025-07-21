@@ -59,7 +59,7 @@ export default function BookingPage() {
             navigate(`${res.data.booking._id}/payment`)
         } catch (err) {
             console.error(err)
-            setMessage('Booking failed')
+            setMessage(err.response.data.msg)
         }
     }
 
