@@ -32,12 +32,12 @@ export default function HotelPreviewList() {
   return (
   <div>
     <h2>Hotel List</h2>
-    <ul>
+    <ul className="hotel-list">
       {hotels.map(hotel => (
         <HotelPreview key={hotel._id} hotel={hotel} />
       ))}
     </ul>
-    <div>
+    <div className="pagination">
       <button onClick={handlePrevious} disabled={page === 1}>
         ⬅️
       </button>
