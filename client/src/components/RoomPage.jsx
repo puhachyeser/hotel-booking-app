@@ -29,6 +29,16 @@ export default function RoomPage() {
 
     return (
     <div>
+        <div className="room-gallery">
+        {room.images?.map((img, idx) => (
+            <img
+                key={idx}
+                src={`http://localhost:5000${img}`}
+                alt={`Room ${room.number} pic ${idx + 1}`}
+                className="room-image"
+            />
+        ))}
+        </div>
         <p>{room.number}</p>
         <p>{room.type}</p>
         <p>{room.price}</p>

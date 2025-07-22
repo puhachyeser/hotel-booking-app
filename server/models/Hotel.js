@@ -24,6 +24,7 @@ const HotelSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide description'],
     },
+    images: [String],
     rooms: {
       type: [
         {
@@ -44,6 +45,7 @@ const HotelSchema = new mongoose.Schema(
             type: String,
             default: 'Placeholder'
           },
+          images: [String]
         }
       ],
       validate: {

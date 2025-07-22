@@ -11,6 +11,11 @@ export default function RoomPreview ({ hotelId, room }) {
     return(
     <li>
         <Link to={`/hotels/${hotelId}/room/${room._id}`}>
+            <img
+                src={`http://localhost:5000${room.images?.[0]}`}
+                alt={room.number}
+                className="room-preview-img"
+            />        
             <strong>{room.number}</strong> ~ {room.type} ~ Price: {room.price}
         </Link>
         {isLoggedIn ? (
