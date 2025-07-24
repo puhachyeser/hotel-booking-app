@@ -19,8 +19,10 @@ export default function GalleryPreview ({ hotel }) {
                 ))}
                 {hotel.images.length > 7 && (
                 <div className="more-photos">
-                    <img src={`http://localhost:5000${hotel.images[7]}`} alt="More" />
-                    <div className="overlay">+{hotel.images.length - 7} more</div>
+                    <div className="image-wrapper">
+                        <img src={`http://localhost:5000${hotel.images[7]}`} alt="More" />
+                        <div className="overlay">+{hotel.images.length - 7} more</div>
+                    </div>
                 </div>
                 )}
             </div>
