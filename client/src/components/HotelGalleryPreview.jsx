@@ -1,9 +1,22 @@
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import HotelModalGallery from "./HotelModalGallery"
 
-export default function GalleryPreview ({ hotel }) {
+export default function HotelGalleryPreview ({ hotel }) {
+    const [open, setOpen] = useState(false)
+
+    const toggleGallery = () => setOpen(prev => !prev)
+
+    useEffect(() => {
+        if (open) {
+            document.body.classList.add('no-scroll')
+        } else {
+            document.body.classList.remove('no-scroll')
+        }
+    }, [open]);
+
     return(
-    <Link to={`/gallery`}>
-        <div className="hotel-gallery">
+    <>
+        <div className="hotel-gallery" onClick={toggleGallery}>
             <div className="gallery-top">
                 <div className="gallery-left">
                     <img src={`http://localhost:5000${hotel.images[0]}`} alt="Main" />
@@ -27,6 +40,9 @@ export default function GalleryPreview ({ hotel }) {
                 )}
             </div>
         </div>
-    </Link>
+        {open && (
+        <HotelModalGallery images={hotel.images} onClose={toggleGallery} />
+        )}
+    </>
     );
 }

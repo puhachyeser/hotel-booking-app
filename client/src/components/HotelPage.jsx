@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import GalleryPreview from './GalleryPreview'
+import HotelGalleryPreview from './HotelGalleryPreview'
 import RoomPreview from './RoomPreview'
 import axiosInstance from '../axiosInstance'
 
@@ -28,19 +28,7 @@ export default function HotelPage() {
     return (
     <div>
         <h2>{hotel.name}</h2>
-        {/*
-        <div className="hotel-gallery">
-        {hotel.images?.map((img, idx) => (
-            <img
-                key={idx}
-                src={`http://localhost:5000${img}`}
-                alt={`Hotel ${hotel.name} pic ${idx + 1}`}
-                className="hotel-image"
-            />
-        ))}
-        </div>
-        */}
-        <GalleryPreview key={hotel._id} hotel={hotel} />
+        <HotelGalleryPreview key={hotel._id} hotel={hotel} />
         <p>Location: {hotel.location}</p>
         <p>Rating: {hotel.rating}</p>
         <p>Price from: {hotel.bottomPrice}</p>
