@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import axiosInstance from '../axiosInstance'
 
-export default function RoomPage() {
+export default function Room() {
     const { hotelId, roomId } = useParams()
     const [room, setRoom] = useState(null)
     const { isLoggedIn } = useAuth()

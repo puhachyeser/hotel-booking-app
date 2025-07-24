@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axiosInstance from '../axiosInstance'
 
-export default function EmailVerificationPage() {
+export default function EmailVerification() {
   const { token } = useParams()
   const [message, setMessage] = useState('Verifying your email...')
 

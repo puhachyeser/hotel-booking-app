@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axiosInstance from '../axiosInstance'
 import dayjs from 'dayjs'
 
-export default function BookingPage() {
+export default function Booking() {
     const navigate = useNavigate()
     const { hotelId, roomId } = useParams()
     const [room, setRoom] = useState(null)

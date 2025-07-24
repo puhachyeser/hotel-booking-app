@@ -1,7 +1,7 @@
 import { useParams, useNavigate, useLocation  } from 'react-router-dom'
 import axios from '../axiosInstance'
 
-export default function PaymentPage() {
+export default function Payment() {
     const { bookingId } = useParams()
     const navigate = useNavigate()
     const location = useLocation()

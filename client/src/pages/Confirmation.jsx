@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 
-export default function ConfirmationPage() {
+export default function Confirmation() {
     const { bookingId } = useParams()
 
     return (

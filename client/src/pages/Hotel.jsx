@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import HotelGalleryPreview from './HotelGalleryPreview'
-import RoomPreview from './RoomPreview'
+import HotelGalleryPreview from '../components/HotelGalleryPreview'
+import RoomPreview from '../components/RoomPreview'
 import axiosInstance from '../axiosInstance'
 
 export default function HotelPage() {

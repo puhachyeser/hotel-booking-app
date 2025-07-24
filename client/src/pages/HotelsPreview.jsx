@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import HotelPreview from './HotelPreview'
+import HotelPreview from '../components/HotelPreview'
 import axiosInstance from '../axiosInstance'
 
-export default function HotelPreviewList() {
+export default function HotelsPreview() {
   const [hotels, setHotels] = useState([])
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
