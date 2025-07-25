@@ -62,7 +62,14 @@ const createHotel = async (req, res) => {
     if (user.isAdmin) req.body.approved = true;
     */
 
-    req.body.createdBy = req.user.userId
+    const { user: { userId } } = req
+    req.body.createdBy = userId
+    const user = await User.findOne({_id: userId})
+
+    if (!user.isAdmin && req.body.approved !== undefined) {
+        throw new UnauthorizedError('Only admins can approve hotels')
+    }
+
     const hotel = await Hotel.create(req.body)
     res.status(StatusCodes.CREATED).json({ hotel })
 }
