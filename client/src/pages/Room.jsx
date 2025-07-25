@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import axiosInstance from '../axiosInstance'
+import RoomModalGallery from '../components/RoomGallery'
 
 export default function Room() {
     const { hotelId, roomId } = useParams()
@@ -29,16 +30,7 @@ export default function Room() {
 
     return (
     <div>
-        <div className="room-gallery">
-        {room.images?.map((img, idx) => (
-            <img
-                key={idx}
-                src={`http://localhost:5000${img}`}
-                alt={`Room ${room.number} pic ${idx + 1}`}
-                className="room-image"
-            />
-        ))}
-        </div>
+        <RoomModalGallery images={room.images} roomNumber={room.number} />
         <p>{room.number}</p>
         <p>{room.type}</p>
         <p>{room.price}</p>

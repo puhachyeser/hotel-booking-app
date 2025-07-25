@@ -1,0 +1,67 @@
+.room-gallery-slider {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.slider-image-container {
+    position: relative;
+    display: inline-block;
+    width: 80%;
+    max-width: 800px;
+}
+
+.room-image-slider {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: opacity 0.5s ease-in-out;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.7);
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+    transition: background 0.3s;
+}
+
+.arrow:hover {
+    background: rgba(255,255,255,0.9);
+}
+
+.arrow.left {
+    left: 10px;
+}
+
+.arrow.right {
+    right: 10px;
+}
+
+.slider-dots {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #333;
+}
