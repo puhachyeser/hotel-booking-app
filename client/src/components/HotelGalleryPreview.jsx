@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import "../HotelGalleryPreview.css"
 import HotelModalGallery from "./HotelModalGallery"
 
 export default function HotelGalleryPreview ({ hotel }) {
