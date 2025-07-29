@@ -12,6 +12,7 @@ const connectDB = require('./db/connect')
 
 const authRouter = require('./routes/auth')
 const hotelsRouter = require('./routes/hotels')
+const reviewsRouter = require('./routes/reviews')
 
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
@@ -23,6 +24,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/hotels-api/auth', authRouter)
 app.use('/hotels-api/hotels', hotelsRouter)
+app.use('/hotels-api/reviews', reviewsRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
