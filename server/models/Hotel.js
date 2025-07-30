@@ -69,7 +69,7 @@ const HotelSchema = new mongoose.Schema(
 )
 
 HotelSchema.pre('validate', function (next) {
-  if (this.rooms && this.rooms.length > 0) {
+  if (this.rooms.length > 0) {
     const prices = this.rooms.map(room => room.price)
     this.bottomPrice = Math.min(...prices)
   }

@@ -118,7 +118,7 @@ const deleteHotel = async (req, res) => {
     const user = await User.findOne({_id: userId})
     checkHotelAccess(user, hotel)
 
-    await Hotel.findOneAndDelete({_id: hotelId, createdBy: userId})
+    await Hotel.findOneAndDelete({_id: hotelId}) // createdBy removed
     res.status(StatusCodes.OK).send()
 }
 
