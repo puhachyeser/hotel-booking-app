@@ -21,7 +21,6 @@ const getReview = async (req, res) => {
 const createReview = async (req, res) => {
     const { user: { userId } } = req
     req.body.createdBy = userId
-    //const user = await User.findOne({_id: userId})
     const review = await Review.create(req.body)
     res.status(StatusCodes.CREATED).json({ review })
 }
@@ -40,7 +39,13 @@ const updateReview = async (req, res) => {
     const user = await User.findOne({_id: userId})
     checkReviewAccess(user, review)
 
-    Object.assign(review, req.body)
+    const allowedFields = ['rating', 'comment']
+    const updateData = {}
+    for (const key of allowedFields) {
+        if (key in req.body) updateData[key] = req.body[key]
+    }
+
+    Object.assign(review, updateData)
     await review.save()
 
     res.status(StatusCodes.OK).json({ updatedReview: review })
