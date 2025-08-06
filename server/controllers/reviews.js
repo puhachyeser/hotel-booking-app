@@ -1,7 +1,7 @@
 const Review = require('../models/Review')
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
-const { NotFoundError, UnauthorizedError, BadRequestError } = require('../errors')
+const { NotFoundError, ConflictError } = require('../errors')
 const checkReviewAccess = require('../utils/checkPermissions')
 
 const getAllReviews = async (req, res) => {
@@ -20,9 +20,15 @@ const getReview = async (req, res) => {
 
 const createReview = async (req, res) => {
     const { user: { userId } } = req
+
+    const existingReview = await Review.findOne({createdBy: userId})
+    if (existingReview) {
+        throw new ConflictError(`Review created by user ${userId} already exists`)
+    }
+
     req.body.createdBy = userId
-    const review = await Review.create(req.body)
-    res.status(StatusCodes.CREATED).json({ review })
+    const newReview = await Review.create(req.body)
+    res.status(StatusCodes.CREATED).json({ newReview })
 }
 
 const updateReview = async (req, res) => {

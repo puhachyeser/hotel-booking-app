@@ -3,6 +3,7 @@ const UnauthenticatedError = require('./unauthenticated')
 const NotFoundError = require('./not-found')
 const BadRequestError = require('./bad-request')
 const UnauthorizedError = require('./unauthorized')
+const ConflictError = require('./conflict')
 
 module.exports = {
   CustomAPIError,
@@ -10,4 +11,5 @@ module.exports = {
   UnauthorizedError,
   NotFoundError,
   BadRequestError,
+  ConflictError
 }
