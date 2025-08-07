@@ -14,7 +14,13 @@ const HotelSchema = new mongoose.Schema(
     },
     rating: {
       type: Number,
-      required: [true, 'Please provide rating'],
+      default: 0,
+      min: 0,
+      max: 10
+    },
+    reviewsCount: {
+      type: Number,
+      default: 0,
     },
     bottomPrice: {
       type: Number,

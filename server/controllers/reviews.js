@@ -3,6 +3,7 @@ const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { NotFoundError, ConflictError } = require('../errors')
 const checkReviewAccess = require('../utils/checkPermissions')
+const updateHotelRating = require('../services/updateHotelRating')
 
 const getAllReviews = async (req, res) => {
     const reviews = await Review.find()
@@ -28,6 +29,7 @@ const createReview = async (req, res) => {
 
     req.body.createdBy = userId
     const newReview = await Review.create(req.body)
+    updateHotelRating(req.body.hotelId)
     res.status(StatusCodes.CREATED).json({ newReview })
 }
 
@@ -54,6 +56,7 @@ const updateReview = async (req, res) => {
     Object.assign(review, updateData)
     await review.save()
 
+    updateHotelRating(review.hotelId)
     res.status(StatusCodes.OK).json({ updatedReview: review })
 }
 
@@ -72,6 +75,7 @@ const deleteReview = async (req, res) => {
     checkReviewAccess(user, review)
 
     await Review.findOneAndDelete({_id: reviewId})
+    updateHotelRating(review.hotelId)
     res.status(StatusCodes.OK).send()
 }
 

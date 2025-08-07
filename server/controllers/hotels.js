@@ -70,6 +70,11 @@ const createHotel = async (req, res) => {
         throw new UnauthorizedError('Only admins can approve hotels')
     }
 
+    // change to another handling later?
+    if (!user.isAdmin && req.body.rating !== undefined) {
+        throw new UnauthorizedError('Only admins can change rating')
+    }
+
     const hotel = await Hotel.create(req.body)
     res.status(StatusCodes.CREATED).json({ hotel })
 }
@@ -90,6 +95,11 @@ const updateHotel = async (req, res) => {
 
     if (!user.isAdmin && req.body.approved !== undefined) {
         throw new UnauthorizedError('Only admins can approve hotels')
+    }
+
+    // change to another handling later?
+    if (!user.isAdmin && req.body.rating !== undefined) {
+        throw new UnauthorizedError('Only admins can change rating')
     }
 
     Object.assign(hotel, req.body)
