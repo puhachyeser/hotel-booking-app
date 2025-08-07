@@ -1,4 +1,4 @@
-import '../HotelModalGallery.css'
+import '../styles/HotelModalGallery.css'
 
 export default function ModalGallery({ images, onClose }) {
   return (

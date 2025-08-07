@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import HotelPreview from '../components/HotelPreview'
+import '../styles/HotelsPreview.css'
 import axiosInstance from '../axiosInstance'
 
 export default function HotelsPreview() {

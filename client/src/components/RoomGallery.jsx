@@ -1,5 +1,5 @@
 import { useState } from "react"
-import '../RoomGallery.css'
+import '../styles/RoomGallery.css'
 
 export default function RoomGallery({ images, roomNumber }) {
     const [currentIndex, setCurrentIndex] = useState(0)

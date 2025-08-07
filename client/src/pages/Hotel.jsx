@@ -4,6 +4,7 @@ import HotelGalleryPreview from '../components/HotelGalleryPreview'
 import RoomPreview from '../components/RoomPreview'
 import ReviewForm from "../components/ReviewForm"
 import axiosInstance from '../axiosInstance'
+import '../styles/Hotel.css'
 
 export default function HotelPage() {
     const { id } = useParams()

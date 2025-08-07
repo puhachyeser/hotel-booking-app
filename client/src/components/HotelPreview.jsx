@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import '../styles/HotelPreview.css'
 
 export default function HotelPreview ({ hotel }) {
     return(
@@ -9,7 +10,10 @@ export default function HotelPreview ({ hotel }) {
                 alt={hotel.name}
                 className="hotel-preview-img"
             />
-            <strong>{hotel.name}</strong> ~ {hotel.location} ~ Rating: {hotel.rating} ~ Bottom Price: {hotel.bottomPrice}
+            <p><strong>{hotel.name}</strong></p>
+            <p>{hotel.location}</p>
+            <p>{hotel.rating}</p>
+            <p>Starting from {hotel.bottomPrice}</p>
         </Link>
     </li>
     );
