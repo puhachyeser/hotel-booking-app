@@ -17,10 +17,51 @@
   display: block;
 }
 
-.hotel-preview-img {
+.preview-img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
   margin-bottom: 0.5rem;
+}
+
+.name {
+  margin: 0 0 0 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.location {
+  margin: 0 0 7px 10px;
+  font-size: 0.9rem;
+  color: #5f5f5f;
+}
+
+.rating-container {
+  margin: 0 0 0 10px;
+}
+
+.rating {
+  display: inline-block;
+  margin-right: 10px;
+  background-color: #004080;
+  color: white;
+  padding: 6px;
+  border-radius: 5px 5px 5px 0;
+  width: auto;
+  text-align: center;
+}
+
+.rating-container span {
+  color: #5f5f5f;
+}
+
+.price {
+  margin: 10px;
+  text-align: end;
+}
+
+.price span {
+  color: #5f5f5f;
+  font-size: 0.9rem;
 }
