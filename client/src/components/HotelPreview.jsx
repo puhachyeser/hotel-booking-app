@@ -8,17 +8,17 @@ export default function HotelPreview ({ hotel }) {
             <img
                 src={`http://localhost:5000${hotel.images?.[0]}`}
                 alt={hotel.name}
-                className="preview-img"
+                className="preview-hotel-img"
             />
-            <p className="name">{hotel.name}</p>
-            <p className="location">{hotel.location}</p>
-            <div className="rating-container">
-                <div className="rating">
+            <p className="preview-hotel-name">{hotel.name}</p>
+            <p className="preview-hotel-location">{hotel.location}</p>
+            <div className="preview-hotel-rating-container">
+                <div className="preview-hotel-rating">
                     {hotel.rating}
                 </div>
                 <span>{hotel.reviewsCount} reviews</span>
             </div>
-            <p className="price"><span>Starting from</span> <strong>UAH {hotel.bottomPrice}</strong></p>
+            <p className="preview-hotel-price"><span>Starting from</span> <strong>UAH {hotel.bottomPrice}</strong></p>
         </Link>
     </li>
     );

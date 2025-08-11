@@ -17,7 +17,7 @@
   display: block;
 }
 
-.preview-img {
+.preview-hotel-img {
   width: 100%;
   height: 180px;
   object-fit: cover;
@@ -25,23 +25,23 @@
   margin-bottom: 0.5rem;
 }
 
-.name {
+.preview-hotel-name {
   margin: 0 0 0 10px;
   font-size: 1.1rem;
   font-weight: bold;
 }
 
-.location {
+.preview-hotel-location {
   margin: 0 0 7px 10px;
   font-size: 0.9rem;
   color: #5f5f5f;
 }
 
-.rating-container {
+.preview-hotel-rating-container {
   margin: 0 0 0 10px;
 }
 
-.rating {
+.preview-hotel-rating {
   display: inline-block;
   margin-right: 10px;
   background-color: #004080;
@@ -52,16 +52,16 @@
   text-align: center;
 }
 
-.rating-container span {
+.preview-hotel-rating-container span {
   color: #5f5f5f;
 }
 
-.price {
+.preview-hotel-price {
   margin: 10px;
   text-align: end;
 }
 
-.price span {
+.preview-hotel-price span {
   color: #5f5f5f;
   font-size: 0.9rem;
 }
