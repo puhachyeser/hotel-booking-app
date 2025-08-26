@@ -40,10 +40,10 @@ export default function HotelsPreview() {
     </ul>
     <div className="pagination">
       <button onClick={handlePrevious} disabled={page === 1}>
-        ⬅️
+        ←
       </button>
       <button onClick={handleNext} disabled={page === totalPages}>
-        ➡️
+        →
       </button>
       <p>Page {page} of {totalPages}</p>
     </div>

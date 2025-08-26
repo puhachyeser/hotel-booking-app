@@ -1,30 +1,18 @@
 import { Link } from "react-router-dom"
-import { useAuth } from '../context/AuthContext'
+import '../styles/RoomPreview.css'
 
 export default function RoomPreview ({ hotelId, room }) {
-    const { isLoggedIn } = useAuth()
-
-    const handleClick = () => {
-        alert('Please log in to make a booking.')
-    }
-
     return(
-    <li>
+    <li className="room-preview">
         <Link to={`/hotels/${hotelId}/room/${room._id}`}>
             <img
                 src={`http://localhost:5000${room.images?.[0]}`}
                 alt={room.number}
-                className="room-preview-img"
+                className="preview-room-img"
             />        
-            <strong>{room.number}</strong> ~ {room.type} ~ Price: {room.price}
+            <p className="preview-room-type"><strong>{room.type}</strong></p>
+            <p className="preview-room-price"><strong>UAH {room.price}</strong> <span>per night</span></p>
         </Link>
-        {isLoggedIn ? (
-            <Link to={`/hotels/${hotelId}/room/${room._id}/book`}>
-                <button>Book</button>        
-            </Link>
-        ) : (
-            <button onClick={handleClick}>Book</button>   
-        )}
     </li>
     );
 }
