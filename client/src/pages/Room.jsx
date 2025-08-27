@@ -30,18 +30,20 @@ export default function Room() {
     }
 
     return (
-    <div>
+    <div className='room-container'>
         <RoomModalGallery images={room.images} roomNumber={room.number} />
-        <p>{room.number}</p>
-        <p>{room.type}</p>
-        <p>{room.price}</p>
-        <p style={{ whiteSpace: 'pre-line' }}>{room.description}</p>
+        <div className='room-upper-container'>
+            <p className='room-type'><strong>Type:</strong> <span>{room.type}</span></p>
+            <p className='room-price'><strong>UAH {room.price}</strong> per night</p>
+        </div>
+        <h3>About this room</h3>
+        <p className='room-description'>{room.description}</p>
         {isLoggedIn ? (
             <Link to={`/hotels/${hotelId}/room/${room._id}/book`}>
-                <button>Book</button>        
+                <button className='book-button'>Book</button>        
             </Link>
         ) : (
-            <button onClick={handleClick}>Book</button>   
+            <button className='book-button' onClick={handleClick}>Book</button>   
         )}
     </div>
     );
