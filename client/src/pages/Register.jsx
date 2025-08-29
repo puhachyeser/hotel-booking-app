@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axiosInstance from '../axiosInstance'
+import '../styles/Register.css'
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -77,7 +78,7 @@ export default function Register() {
                 onChange={handleChange}
                 required
             />
-            <button type="submit">Register</button>
+            <button className="register-button" type="submit">Register</button>
             {message && <p>{message}</p>}
         </form>
     </div>

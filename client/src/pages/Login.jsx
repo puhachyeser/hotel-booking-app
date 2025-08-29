@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axiosInstance from '../axiosInstance'
 import { useAuth } from '../context/AuthContext'
+import '../styles/Login.css'
 
 export default function Login() {
     const { login } = useAuth()
@@ -57,7 +58,7 @@ export default function Login() {
                 onChange={handleChange}
                 required
             />
-            <button type="submit">Login</button>
+            <button className="login-button" type="submit">Login</button>
             {message && <p>{message}</p>}
         </form>
     </div>

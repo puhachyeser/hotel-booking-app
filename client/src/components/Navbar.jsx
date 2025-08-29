@@ -13,16 +13,25 @@ export default function Navbar() {
 
   return (
   <nav>
-    <Link to="/">Home</Link> |{' '}
-    <Link to="/register">Registration</Link> |{' '}
-    <Link to="/login">Login</Link>
+    <Link className="home-link" to="/">Home</Link>
+    {!isLoggedIn && (
+      <div>
+        <Link to="/register">
+          <button>
+            Register
+          </button>
+        </Link>
+        <Link to="/login">
+          <button>
+            Login
+          </button>
+        </Link>
+      </div>
+    )}
     {isLoggedIn && (
-      <>
-        |{' '}
-        <button onClick={handleLogout}>
-          Exit
-        </button>
-      </>
+      <button onClick={handleLogout}>
+        Exit
+      </button>
     )}
   </nav>
   )

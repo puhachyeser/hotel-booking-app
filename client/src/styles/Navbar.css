@@ -8,14 +8,29 @@ nav {
   flex-wrap: wrap;
 }
 
-nav a {
+nav .home-link {
   color: white;
-  margin-right: 1rem;
+  font-size: 1.1rem;
   text-decoration: none;
   font-weight: bold;
 }
 
+nav div {
+  display: flex;
+  gap: 1rem;
+}
+
 nav button {
+  background-color: white;
+  color: #0062c4;
+  padding: 5px 10px;
+  border: black;
+  border-radius: 5px;
+  border-color: #0062c4;
+  font-size: 1rem;
+}
+/*
+nav .exit-button {
   background-color: #ff4d4f;
   border: none;
   color: white;
@@ -24,6 +39,7 @@ nav button {
   cursor: pointer;
 }
 
-nav button:hover {
+nav .exit-button:hover {
   background-color: #d9363e;
 }
+*/
