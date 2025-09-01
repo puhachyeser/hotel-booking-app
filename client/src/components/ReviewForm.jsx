@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import axiosInstance from "../axiosInstance"
+import "../styles/ReviewForm.css"
 
 export default function ReviewForm({ hotelId }) {
     const [rating, setRating] = useState(0)
@@ -9,7 +10,6 @@ export default function ReviewForm({ hotelId }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         if (rating === 0 || comment.trim() === "") {
             alert("Please, fill in rating and comment fields.");
             return
@@ -17,11 +17,7 @@ export default function ReviewForm({ hotelId }) {
 
         try {
             setLoading(true)
-            await axiosInstance.post(`/reviews`, {
-                hotelId,
-                rating,
-                comment,
-            })
+            await axiosInstance.post(`/reviews`, { hotelId, rating, comment })
             setRating(0)
             setComment("")
         } catch (err) {
@@ -32,53 +28,50 @@ export default function ReviewForm({ hotelId }) {
         }
     }
 
-  return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
-        <h4>Leave a review</h4>
-        <div style={{ display: "flex", gap: "5px", fontSize: "28px" }}>
-        {[1, 2, 3, 4, 5].map((star) => {
-            const leftValue = (star - 1) * 2 + 1
-            const rightValue = star * 2
-            return (
-            <div key={star} style={{ position: "relative", display: "inline-block" }}>
-                <span
-                    style={{
-                        cursor: "pointer",
-                        color: leftValue <= (hover || rating) ? "gold" : "gray",
-                        position: "absolute",
-                        width: "50%",
-                        overflow: "hidden",
-                    }}
-                    onClick={() => setRating(leftValue)}
-                    onMouseEnter={() => setHover(leftValue)}
-                    onMouseLeave={() => setHover(0)}
-                >
-                ★
-                </span>
-                <span
-                    style={{
-                        cursor: "pointer",
-                        color: rightValue <= (hover || rating) ? "gold" : "gray",
-                    }}
-                    onClick={() => setRating(rightValue)}
-                    onMouseEnter={() => setHover(rightValue)}
-                    onMouseLeave={() => setHover(0)}
-                >
-                ★
-                </span>
+    return (
+        <form onSubmit={handleSubmit} className="review-form">
+            <h3 className="review-title">Leave a review</h3>
+            <div className="star-container">
+                {[1, 2, 3, 4, 5].map((star) => {
+                    const leftValue = (star - 1) * 2 + 1
+                    const rightValue = star * 2
+                    return (
+                        <div key={star} className="star-wrapper">
+                            <span
+                            className="star left-star"
+                            style={{
+                                color: leftValue <= (hover || rating) ? "gold" : "gray"
+                            }}
+                            onClick={() => setRating(leftValue)}
+                            onMouseEnter={() => setHover(leftValue)}
+                            onMouseLeave={() => setHover(0)}
+                            >
+                                ★
+                            </span>
+                            <span
+                            className="star right-star"
+                            style={{
+                                color: rightValue <= (hover || rating) ? "gold" : "gray"
+                            }}
+                            onClick={() => setRating(rightValue)}
+                            onMouseEnter={() => setHover(rightValue)}
+                            onMouseLeave={() => setHover(0)}
+                            >
+                                ★
+                            </span>
+                        </div>
+                    )
+                })}
             </div>
-            )
-        })}
-        </div>
-        <textarea
-        placeholder="Your comment..."
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        style={{ display: "block", width: "100%", marginTop: "10px", padding: "8px" }}
-        />
-        <button type="submit" disabled={loading} style={{ marginTop: "10px" }}>
-        {loading ? "Submitting..." : "Submit"}
-        </button>
-    </form>
-  )
+            <textarea
+            className="review-textarea"
+            placeholder="Your comment..."
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            />
+            <button type="submit" className="submit-review-btn" disabled={loading}>
+                {loading ? "Submitting..." : "Submit"}
+            </button>
+        </form>
+    )
 }

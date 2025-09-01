@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axiosInstance from '../axiosInstance'
 import dayjs from 'dayjs'
+import '../styles/Booking.css'
 
 export default function Booking() {
     const navigate = useNavigate()
@@ -88,7 +89,7 @@ export default function Booking() {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit">Book</button>
+                <button className="book-button" type="submit">Book</button>
                 {message && <p>{message}</p>}
             </form>
         </div>

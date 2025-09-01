@@ -8,9 +8,9 @@ const app = express()
 const cors = require('cors')
 
 const connectDB = require('./db/connect')
-//const authenticateUser = require('./middleware/authentication')
 
 const authRouter = require('./routes/auth')
+const usersRouter = require('./routes/users')
 const hotelsRouter = require('./routes/hotels')
 const reviewsRouter = require('./routes/reviews')
 
@@ -23,6 +23,7 @@ app.use(cors())
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/hotels-api/auth', authRouter)
+app.use('/hotels-api/users', usersRouter)
 app.use('/hotels-api/hotels', hotelsRouter)
 app.use('/hotels-api/reviews', reviewsRouter)
 

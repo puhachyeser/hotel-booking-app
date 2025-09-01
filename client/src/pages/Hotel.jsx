@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import HotelGalleryPreview from '../components/HotelGalleryPreview'
 import RoomPreview from '../components/RoomPreview'
+import Reviews from "../components/Reviews"
 import ReviewForm from "../components/ReviewForm"
 import axiosInstance from '../axiosInstance'
 import { FaMapMarkerAlt } from "react-icons/fa"
@@ -50,6 +51,7 @@ export default function HotelPage() {
                 <RoomPreview key={room._id} hotelId={hotel._id} room={room} />
             ))}
         </ul>
+        <Reviews hotelId={hotel._id} />
         <ReviewForm hotelId={hotel._id} />
     </div>
     );
