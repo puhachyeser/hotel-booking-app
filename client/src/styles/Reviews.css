@@ -1,0 +1,55 @@
+.reviews-container {
+    display: flex;
+    gap: 20px;
+}
+
+.review-container {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 10%;
+}
+
+.review-container div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-username {
+    font-weight: bold;
+    text-align: center;
+}
+
+.review-comment {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+           line-clamp: 3; 
+    -webkit-box-orient: vertical;
+}
+
+.review-rating {
+    margin-left: 0.5rem;
+    background-color: #004080;
+    color: white;
+    padding: 6px;
+    border-radius: 5px 5px 5px 0;
+}
+
+.reviews-carousel {
+    display: flex;
+    align-items: center;
+}
+
+.arrow-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.arrow-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

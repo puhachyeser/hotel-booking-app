@@ -4,6 +4,7 @@ import "../styles/Reviews.css"
 
 export default function Reviews({ hotelId }) {
     const [reviews, setReviews] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
 
     useEffect(() => {
         
@@ -32,19 +33,39 @@ export default function Reviews({ hotelId }) {
         fetchReviews()
     },  [hotelId])
 
+    const nextSlide = () => {
+        if (currentIndex < reviews.length - 3) {
+            setCurrentIndex(currentIndex + 1)
+        }
+    }
+
+    const prevSlide = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1)
+        }
+    }
+
 
     return (
         <>
             <h3>Reviews</h3>
-            {reviews.map((review) => {
-                return(
-                    <div key={review._id} className="review-container">
-                        <p className="review-username">{review.username}</p>
-                        <p className="review-rating">{review.rating}</p>
-                        <p className="review-comment">{review.comment}</p>
-                    </div>
-                )
-            })}
+            <div className="reviews-carousel">
+                <button onClick={prevSlide} disabled={currentIndex === 0} className="arrow-btn left">◀</button>
+                <div className="reviews-container">
+                {reviews.slice(currentIndex, currentIndex + 3).map((review) => {
+                    return(
+                        <div key={review._id} className="review-container">
+                            <div>
+                                <p className="review-username">{review.username}</p>
+                                <p className="review-rating">{review.rating}</p>
+                            </div>
+                            <p className="review-comment">{review.comment}</p>
+                        </div>
+                    )
+                })}
+                </div>
+                <button onClick={nextSlide} disabled={currentIndex >= reviews.length - 3} className="arrow-btn right">▶</button>
+            </div>
         </>
     )
 }
