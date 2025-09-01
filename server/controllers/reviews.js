@@ -22,7 +22,7 @@ const getReview = async (req, res) => {
 const createReview = async (req, res) => {
     const { user: { userId } } = req
 
-    const existingReview = await Review.findOne({createdBy: userId})
+    const existingReview = await Review.findOne({createdBy: userId, hotelId: req.body.hotelId})
     if (existingReview) {
         throw new ConflictError(`Review created by user ${userId} already exists`)
     }
