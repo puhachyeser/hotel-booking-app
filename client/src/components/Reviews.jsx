@@ -34,7 +34,7 @@ export default function Reviews({ hotelId }) {
     },  [hotelId])
 
     const nextSlide = () => {
-        if (currentIndex < reviews.length - 3) {
+        if (currentIndex < reviews.length - 4) {
             setCurrentIndex(currentIndex + 1)
         }
     }
@@ -45,15 +45,19 @@ export default function Reviews({ hotelId }) {
         }
     }
 
+    const carouselReviews = reviews.slice(0, 6)
 
     return (
         <>
             <h3>Reviews</h3>
             <div className="reviews-carousel">
                 <button onClick={prevSlide} disabled={currentIndex === 0} className="arrow-btn left">◀</button>
-                <div className="reviews-container">
-                {reviews.slice(currentIndex, currentIndex + 3).map((review) => {
-                    return(
+                <div className="reviews-window">
+                    <div 
+                        className="reviews-container"
+                        style={{ transform: `translateX(-${currentIndex * (100/3)}%)` }}
+                    >
+                    {carouselReviews.map((review) => (
                         <div key={review._id} className="review-container">
                             <div>
                                 <p className="review-username">{review.username}</p>
@@ -61,10 +65,10 @@ export default function Reviews({ hotelId }) {
                             </div>
                             <p className="review-comment">{review.comment}</p>
                         </div>
-                    )
-                })}
+                    ))}
+                    </div>
                 </div>
-                <button onClick={nextSlide} disabled={currentIndex >= reviews.length - 3} className="arrow-btn right">▶</button>
+                <button onClick={nextSlide} disabled={currentIndex >= reviews.length - 4} className="arrow-btn right">▶</button>
             </div>
         </>
     )
