@@ -1,13 +1,13 @@
 .reviews-container {
     display: flex;
-    gap: 20px;
+    gap: 1rem;
 }
 
 .review-container {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 1rem;
-    width: 10%;
+    width: 8rem;
 }
 
 .review-container div {
@@ -38,18 +38,29 @@
 
 .reviews-carousel {
     display: flex;
+    position: relative;
+    justify-content: center;
     align-items: center;
+    width: 33rem;
 }
 
 .arrow-btn {
+    position: absolute;
     background: none;
     border: none;
     font-size: 2rem;
     cursor: pointer;
-    padding: 0 10px;
 }
 
 .arrow-btn:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+}
+
+.arrow-btn.left {
+    right: 15.8em;
+}
+
+.arrow-btn.right {
+    left: 15.8em;
 }
