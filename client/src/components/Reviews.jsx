@@ -55,7 +55,7 @@ export default function Reviews({ hotelId }) {
                 <div className="reviews-window">
                     <div 
                         className="reviews-container"
-                        style={{ transform: `translateX(-${currentIndex * (100/3)}%)` }}
+                        style={{ transform: `translateX(calc(-${currentIndex * 11.1}rem` }}
                     >
                     {carouselReviews.map((review) => (
                         <div key={review._id} className="review-container">
