@@ -1,4 +1,4 @@
-.modal-gallery-overlay {
+.modal-reviews-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,31 +11,35 @@
     align-items: center;
 }
 
-.modal-gallery {
+.modal-reviews {
     background-color: white;
     padding: 2rem;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 40%;
+    max-height: 40%;
     overflow-y: auto;
     position: relative;
     border-radius: 10px;
 }
 
-.modal-gallery .images-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
+.reviews-list .modal-review div {
+    display: flex;
+    align-items: center;
 }
 
-.modal-gallery .images-grid img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-    cursor: pointer;
+.reviews-list .modal-review div .review-username {
+    font-weight: bold;
+    text-align: center;
 }
 
-.modal-gallery .close-btn {
+.reviews-list .modal-review div .review-rating {
+    margin-left: 2rem;
+    background-color: #004080;
+    color: white;
+    padding: 6px;
+    border-radius: 5px 5px 5px 0;
+}
+
+.modal-reviews .close-btn {
     position: absolute;
     top: 1rem;
     right: 1rem;
