@@ -18,12 +18,12 @@
     justify-content: space-between;
 }
 
-.review-username {
+.review-container .review-username {
     font-weight: bold;
     text-align: center;
 }
 
-.review-comment {
+.review-container .review-comment {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -31,7 +31,7 @@
     -webkit-box-orient: vertical;
 }
 
-.review-rating {
+.review-container .review-rating {
     margin-left: 0.5rem;
     background-color: #004080;
     color: white;
@@ -71,4 +71,13 @@
 
 .arrow-btn.right {
     left: 16.5em;
+}
+
+.modal-reviews-link {
+    margin-left: 0.5rem;
+}
+
+.modal-reviews-link:hover {
+    color: gray;
+    cursor: pointer;
 }

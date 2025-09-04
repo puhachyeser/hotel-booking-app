@@ -90,7 +90,7 @@ export default function Reviews({ hotelId }) {
                 </div>
                 <button onClick={nextSlide} disabled={currentIndex >= reviews.length - 4} className="arrow-btn right">▶</button>
             </div>
-            <p onClick={toggleModalReviews}>Read all reviews</p>
+            <p className="modal-reviews-link" onClick={toggleModalReviews}>Read all reviews</p>
             {openModalReview && (
             <ModalReview review={selectedReview} onClose={toggleModalReview} />
             )}

@@ -38,7 +38,7 @@ export default function HotelsPreview() {
         <HotelPreview key={hotel._id} hotel={hotel} />
       ))}
     </ul>
-    <div className="pagination">
+    <div className="hotels-pagination">
       <button onClick={handlePrevious} disabled={page === 1}>
         ←
       </button>

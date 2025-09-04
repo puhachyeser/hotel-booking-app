@@ -13,12 +13,12 @@ ul {
   gap: 1.5rem;
 }
 
-.pagination {
+.hotels-pagination {
   margin-top: 2rem;
   text-align: center;
 }
 
-.pagination button {
+.hotels-pagination button {
   background-color: #004080;
   color: white;
   border: none;
@@ -28,11 +28,11 @@ ul {
   cursor: pointer;
 }
 
-.pagination button:disabled {
+.hotels-pagination button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
 
-.pagination p {
+.hotels-pagination p {
   margin-top: 0.5rem;
 }

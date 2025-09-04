@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-.modal-review {
+.modal-review.single {
     background-color: white;
     padding: 2rem;
     max-width: 40%;
@@ -21,17 +21,17 @@
     border-radius: 10px;
 }
 
-.modal-review div {
+.modal-review.single div {
     display: flex;
     align-items: center;
 }
 
-.modal-review div .review-username {
+.modal-review.single div .review-username {
     font-weight: bold;
     text-align: center;
 }
 
-.modal-review div .review-rating {
+.modal-review.single div .review-rating {
     margin-left: 2rem;
     background-color: #004080;
     color: white;
@@ -39,7 +39,7 @@
     border-radius: 5px 5px 5px 0;
 }
 
-.modal-review .close-btn {
+.modal-review.single .close-btn {
     position: absolute;
     top: 1rem;
     right: 1rem;
