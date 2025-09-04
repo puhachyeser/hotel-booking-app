@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import axiosInstance from "../axiosInstance"
 import "../styles/Reviews.css"
 import ModalReview from "./ModalReview"
 import ModalReviews from "./ModalReviews"
 
-export default function Reviews({ hotelId }) {
-    const [reviews, setReviews] = useState([])
+export default function Reviews({ reviews }) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [openModalReview, setOpenReview] = useState(false)
     const [openModalReviews, setOpenReviews] = useState(false)
@@ -26,32 +24,6 @@ export default function Reviews({ hotelId }) {
             document.body.classList.remove('no-scroll')
         }
     }, [openModalReview, openModalReviews]);
-
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const res = await axiosInstance.get(`/reviews`)
-                let hotelReviews = res.data.reviews.filter(r => r.hotelId === hotelId)
-
-                const reviewsWithUsers = await Promise.all(
-                    hotelReviews.map(async (review) => {
-                        try {
-                            const userRes = await axiosInstance.get(`/users/${review.createdBy}`)
-                            return { ...review, username: userRes.data.user.name }
-                        } catch {
-                            return { ...review, username: "Unknown" }
-                        }
-                    })
-                )
-
-                setReviews(reviewsWithUsers)
-            } catch (err) {
-                console.error('Error loading reviews:', err)
-            }
-        }
-
-        fetchReviews()
-    },  [hotelId])
 
     const nextSlide = () => {
         if (currentIndex < reviews.length - 4) {

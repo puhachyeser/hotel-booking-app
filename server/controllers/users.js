@@ -16,6 +16,14 @@ const getUser = async (req, res) => {
     res.status(StatusCodes.OK).json({ user })
 }
 
+const getMe = async (req, res) => {
+    try {
+        res.json({ user: req.user })
+    } catch (err) {
+        res.status(500).json({ message: "Server error" })
+    }
+}
+
 const updateUser = async (req, res) => {
     const {
         user: { userId},
@@ -69,6 +77,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
     getAllUsers,
     getUser,
+    getMe,
     updateUser,
     deleteUser
 }
