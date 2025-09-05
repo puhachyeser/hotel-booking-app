@@ -20,21 +20,21 @@ export default function HotelGalleryPreview ({ hotel }) {
         <div className="hotel-gallery" onClick={toggleGallery}>
             <div className="gallery-top">
                 <div className="gallery-left">
-                    <img src={`${REACT_APP_API_URL}${hotel.images[0]}`} alt="Main" />
+                    <img src={`${process.env.REACT_APP_API_URL}${hotel.images[0]}`} alt="Main" />
                 </div>
                 <div className="gallery-right">
-                    <img src={`${REACT_APP_API_URL}${hotel.images[1]}`} alt="Right 1" />
-                    <img src={`${REACT_APP_API_URL}${hotel.images[2]}`} alt="Right 2" />
+                    <img src={`${process.env.REACT_APP_API_URL}${hotel.images[1]}`} alt="Right 1" />
+                    <img src={`${process.env.REACT_APP_API_URL}${hotel.images[2]}`} alt="Right 2" />
                 </div>
             </div>
             <div className="gallery-bottom">
                 {hotel.images.slice(3, 7).map((img, idx) => (
-                <img key={idx} src={`${REACT_APP_API_URL}${img}`} alt={`Bottom ${idx}`} />
+                <img key={idx} src={`${process.env.REACT_APP_API_URL}${img}`} alt={`Bottom ${idx}`} />
                 ))}
                 {hotel.images.length > 7 && (
                 <div className="more-photos">
                     <div className="image-wrapper">
-                        <img src={`${REACT_APP_API_URL}${hotel.images[7]}`} alt="More" />
+                        <img src={`${process.env.REACT_APP_API_URL}${hotel.images[7]}`} alt="More" />
                         <div className="overlay">+{hotel.images.length - 7} more</div>
                     </div>
                 </div>

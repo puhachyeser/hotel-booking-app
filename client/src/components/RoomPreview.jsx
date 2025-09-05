@@ -6,7 +6,7 @@ export default function RoomPreview ({ hotelId, room }) {
     <li className="room-preview">
         <Link to={`/hotels/${hotelId}/room/${room._id}`}>
             <img
-                src={`${REACT_APP_API_URL}${room.images?.[0]}`}
+                src={`${process.env.REACT_APP_API_URL}${room.images?.[0]}`}
                 alt={room.number}
                 className="preview-room-img"
             />        
