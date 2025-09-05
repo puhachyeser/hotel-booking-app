@@ -28,8 +28,8 @@ app.use('/hotels-api/users', usersRouter)
 app.use('/hotels-api/hotels', hotelsRouter)
 app.use('/hotels-api/reviews', reviewsRouter)
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..client/build', 'index.html'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 })
 
 app.use(notFoundMiddleware)
