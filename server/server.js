@@ -21,11 +21,16 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+app.use(express.static(path.join(__dirname, '../client/build')))
 
 app.use('/hotels-api/auth', authRouter)
 app.use('/hotels-api/users', usersRouter)
 app.use('/hotels-api/hotels', hotelsRouter)
 app.use('/hotels-api/reviews', reviewsRouter)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..client/build', 'index.html'));
+})
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

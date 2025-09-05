@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm start --prefix client\" \"npm start --prefix server\""
+    "dev": "concurrently \"npm start --prefix client\" \"npm start --prefix server\"",
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "build": "cd client && npm run build",
+    "start": "node server/server.js"
   },
   "keywords": [],
   "author": "",
