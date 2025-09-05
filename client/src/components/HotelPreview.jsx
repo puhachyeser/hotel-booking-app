@@ -6,7 +6,7 @@ export default function HotelPreview ({ hotel }) {
     <li className="hotel-preview">
         <Link to={`/hotels/${hotel._id}`}>
             <img
-                src={`http://localhost:5000${hotel.images?.[0]}`}
+                src={`${REACT_APP_API_URL}${hotel.images?.[0]}`}
                 alt={hotel.name}
                 className="preview-hotel-img"
             />

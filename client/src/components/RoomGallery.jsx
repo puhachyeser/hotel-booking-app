@@ -22,7 +22,7 @@ export default function RoomGallery({ images, roomNumber }) {
         <div className="room-gallery-slider">
             <div className="slider-image-container">
                 <img
-                    src={`http://localhost:5000${images[currentIndex]}`}
+                    src={`${REACT_APP_API_URL}${images[currentIndex]}`}
                     alt={`Room ${roomNumber} pic`}
                     className="room-image-slider"
                 />

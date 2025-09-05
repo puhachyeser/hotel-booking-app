@@ -7,7 +7,7 @@ export default function ModalGallery({ images, onClose }) {
             <button className="close-btn" onClick={onClose}>×</button>
             <div className="images-grid">
                 {images.map((img, idx) => (
-                <img key={idx} src={`http://localhost:5000${img}`} alt={`Gallery ${idx}`} />
+                <img key={idx} src={`${REACT_APP_API_URL}${img}`} alt={`Gallery ${idx}`} />
                 ))}
             </div>
         </div>
