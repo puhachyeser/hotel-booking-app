@@ -35,12 +35,6 @@ app.get('/*', (req, res) => {
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-app.get('/', (req, res) => {
-    res.send(`
-      <h1>Server Main</h1>
-      `)
-})
-
 const port = process.env.PORT
 
 const start = async () => {
